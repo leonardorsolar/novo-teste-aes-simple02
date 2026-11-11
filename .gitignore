@@ -36,3 +36,5 @@ coverage/
 Thumbs.db
 .idea/
 .vscode/
+/factory/jobs/
+/.worktrees/
