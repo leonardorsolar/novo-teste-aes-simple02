@@ -6,27 +6,51 @@ Projeto de teste da plataforma AES (Orquestrador), criado para validar o fluxo d
 
 - `.claude/agents/` — definições de agentes do projeto (ex.: `intake`, responsável por triar issues do GitHub).
 - `.aes/` — estado local da plataforma (atividade e tarefas). Não é versionado.
+- `src/` — código da aplicação: `app.js` cria o app Express e `server.js` inicia o servidor.
+- `test/` — testes automatizados da aplicação.
 
 ## Tecnologias
 
-Ainda não definidas. O projeto não possui código de aplicação no momento.
+- Node.js
+- Express
+- Testes com o runner nativo `node:test` e `supertest`
 
 ## Pré-requisitos
 
 - Git
+- Node.js (versão 18 ou superior)
 - GitHub CLI (`gh`), opcional, para criar e publicar o repositório remoto
 
 ## Instalação
 
-Não aplicável até que a stack do projeto seja definida.
+```bash
+npm install
+```
 
 ## Execução
 
-Não aplicável até que a aplicação seja criada.
+```bash
+npm start
+```
+
+O servidor escuta na porta 3000 por padrão. Para usar outra porta, defina a variável `PORT`:
+
+```bash
+PORT=8080 npm start
+```
+
+Exemplo de requisição:
+
+```bash
+curl http://localhost:3000/
+# Hello World
+```
 
 ## Testes
 
-Não aplicável até que a aplicação seja criada.
+```bash
+npm test
+```
 
 ## Licença
 
