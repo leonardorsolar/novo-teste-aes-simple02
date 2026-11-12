@@ -10,3 +10,11 @@ Fases: Discover, Design, Build, Verify, Deliver, Operate
 - grava: intake.md
 - comandos: @intake issue #N
 - aprovação: não
+
+### prd
+- id: prd
+- executa: agente prd
+- grava: prd.md
+- comandos: @prd issue #3
+- aprovação: não
+- vereditos: APPROVED → @fim

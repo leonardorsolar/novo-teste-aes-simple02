@@ -1,0 +1,85 @@
+{
+  "format": "aes-cycle",
+  "version": 1,
+  "cycle": {
+    "id": "novo_ciclo",
+    "label": "Novo ciclo",
+    "description": "",
+    "approval": "stop_at_pr",
+    "default_profile": "novo_ciclo"
+  },
+  "phases": [
+    {
+      "id": "discover",
+      "label": "Discover",
+      "column": "To Do"
+    },
+    {
+      "id": "design",
+      "label": "Design",
+      "column": "In Progress"
+    },
+    {
+      "id": "build",
+      "label": "Build",
+      "column": "In Progress"
+    },
+    {
+      "id": "verify",
+      "label": "Verify",
+      "column": "In Review"
+    },
+    {
+      "id": "deliver",
+      "label": "Deliver",
+      "column": "In Review"
+    },
+    {
+      "id": "operate",
+      "label": "Operate",
+      "column": "Done"
+    }
+  ],
+  "approval_modes": {
+    "stop_at_pr": {
+      "label": "Para no PR",
+      "pause_after": [
+        "pr"
+      ]
+    }
+  },
+  "steps": {
+    "intake": {
+      "phase": "discover",
+      "label": "intake",
+      "run": {
+        "agent": "intake"
+      },
+      "writes": "intake.md",
+      "next": {
+        "DONE": "@next",
+        "BLOCKED": "@human"
+      }
+    },
+    "prd": {
+      "phase": "discover",
+      "label": "prd",
+      "run": {
+        "agent": "prd"
+      },
+      "writes": "prd.md",
+      "next": {
+        "APPROVED": "@done"
+      }
+    }
+  },
+  "profiles": {
+    "novo_ciclo": {
+      "label": "Novo ciclo",
+      "steps": [
+        "intake",
+        "prd"
+      ]
+    }
+  }
+}
