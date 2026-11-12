@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "dabc9657-4ead-47b1-8737-3f8fd2ff0eb7",
+      "kind": "deed",
+      "action": "cycle.saved",
+      "title": "Novo ciclo",
+      "timestamp": "2026-11-12T21:42:21.693Z"
+    },
+    {
+      "id": "6319128a-c009-4c0f-9380-e674fed84d34",
+      "kind": "deed",
+      "action": "onboarding.finished",
+      "title": "",
+      "timestamp": "2026-11-12T21:32:27.091Z"
+    },
+    {
+      "id": "91050f9e-9889-4cef-a060-9e9feb084988",
+      "kind": "deed",
+      "action": "skills.installed",
+      "title": "",
+      "summary": "23 arquivos em .claude/skills",
+      "timestamp": "2026-11-12T21:32:15.492Z"
+    },
+    {
+      "id": "03c76659-865d-4124-9a77-20cabc9e6c5d",
+      "kind": "deed",
+      "action": "onboarding.finished",
+      "title": "",
+      "timestamp": "2026-11-12T21:30:42.929Z"
+    },
+    {
+      "id": "ad6bc45d-d39b-4f3f-aa5c-0c2d7d4facd0",
+      "kind": "deed",
+      "action": "project.selected",
+      "title": "novo-teste-aes-simple02",
+      "summary": "1 item · Git repository",
+      "timestamp": "2026-11-12T21:30:34.756Z"
+    }
+  ]
+}
