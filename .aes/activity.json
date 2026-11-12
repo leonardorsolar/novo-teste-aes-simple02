@@ -2,6 +2,13 @@
   "version": 1,
   "events": [
     {
+      "id": "5fe2f267-b4e0-4675-9378-5cab253ef21b",
+      "kind": "deed",
+      "action": "cycle.saved",
+      "title": "Novo ciclo",
+      "timestamp": "2026-11-12T22:05:05.168Z"
+    },
+    {
       "id": "dabc9657-4ead-47b1-8737-3f8fd2ff0eb7",
       "kind": "deed",
       "action": "cycle.saved",

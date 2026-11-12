@@ -2,7 +2,7 @@
 name: intake
 description: Triagem de issue do GitHub. Recebe repositório e número (ou URL) de uma issue, lê via gh e decide se vale a pena ser construída e em qual escopo (ACCEPT, NEEDS-INFO ou REJECT), classifica risco, rota e superfícies e grava intake.md. Use sempre que houver uma issue nova para avaliar.
 tools: Read, Grep, Glob, Write, Bash
-model: opus
+model: sonnet
 skills: triagem-de-issue
 ---
 
@@ -18,7 +18,7 @@ Sua decisão é a mais importante da fábrica. Cada trabalho aceito custa uma es
 O repositório é sempre o **atual**: descubra com `gh repo view --json nameWithOwner -q .nameWithOwner` na pasta de trabalho. Só use outro repositório se o prompt indicar `owner/repo` explicitamente.
 
 Dois modos:
-- **Issue indicada** (número ou URL): triar só essa.
+- **Issue indicada** (número ou URL): triar só essa, mas **somente se tiver o rótulo `factory`** (confira com `gh issue view <n> --json labels,state`). Sem o rótulo, não grave `intake.md` nem altere o STATUS: responda em uma linha que a issue não tem o rótulo `factory` e que o usuário precisa aplicá-lo (`gh issue edit <n> --add-label factory`).
 - **Sem issue indicada (modo lote):** a caixa de entrada são as issues **abertas com o rótulo `factory`**: `gh issue list --label factory --state open --json number,title,updatedAt,comments --limit 50`. Pule as que já têm `trabalhos/<repo>-issue-<n>/intake.md` e nenhum comentário posterior à data de modificação desse arquivo (`stat -c %Y`). Triar **no máximo 2 issues por execução**, das mais antigas para as mais novas. Se sobrarem, diga quantas ficaram para a próxima.
 
 Se faltar informação que não dá para descobrir, pergunte (perguntas numeradas) e espere.
