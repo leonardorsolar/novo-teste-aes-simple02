@@ -7,24 +7,37 @@ manual:
 @intake triar a issue 3
 @prd crie o PRD da issue 3
 @doc-writer-techspec crie o techspec da issue 3
-
+@execute-task do techspec da issue 
+@doc-writer-tasks e leia a techspec e execute a etapa tasks da issue 3   
+@execute-task e leia os arquivos prd.md e techspec.md e execute a etapa execute tasks da issue 3
+@gate rodar os testes da issue 3
 
 # Criação das fase da factory
 
 passo 1: intake
-use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir do agente .claude/agents/intake.md. crie o ciclo (pipeline) na fase discovery.
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente .claude/agents/intake.md. crie o ciclo (pipeline) na fase discovery.
 
 passo 2:
-use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-create-prd/SKILL.md e ajuste  ciclo (pipeline) na fase discovery.
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente a partir da skill .claude/skills/aes-create-prd/SKILL.md e ajuste  ciclo (pipeline) na fase discovery.
 
 passo 3:
-use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-create-techspec e ajuste  ciclo (pipeline) na fase design.
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente a partir da skill .claude/skills/aes-create-techspec e ajuste  ciclo (pipeline) na fase design.
 
 passo 4:
-use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-create-tasks e ajuste  ciclo (pipeline) na fase design.
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente a partir da skill .claude/skills/aes-create-tasks e ajuste  ciclo (pipeline) na fase design.
 
 passo 5:
-use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-execute-task e ajuste  ciclo (pipeline) na fase Build.
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente a partir da skill .claude/skills/aes-execute-task e ajuste  ciclo (pipeline) na fase Build.
+
+passo 6:
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente para criar o gate em que o agente detecta lint, tipos, testes e build, roda sem --fix e grava gate.md com GATE: PASS, FAIL ou SKIPPED na primeira linha
+
+passo 7:
+use a skill .claude/skills/criar-agente/SKILL.md e gere o agente .claude/agents/intake.md. crie o ciclo (pipeline) na fase discovery.
+
+OBS>: Existe a skill mais completa: criar-agente-skill-memory
+ex.:
+use a skill .claude/skills/criar-agente-skill-memory/SKILL.md e gere o bloco a partir do agente .claude/agents/intake.md. crie o ciclo (pipeline) na fase discovery.
 
 # Rodando o teste do passo 1
 

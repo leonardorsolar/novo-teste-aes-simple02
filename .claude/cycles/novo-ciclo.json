@@ -135,6 +135,200 @@
       "needs": [
         "tasks"
       ]
+    },
+    "gate": {
+      "phase": "verify",
+      "label": "Gate",
+      "run": {
+        "agent": "gate (skill aes-run-gate)"
+      },
+      "reads": [
+        "execute-task.md"
+      ],
+      "writes": "gate.md",
+      "next": {
+        "PASS": "@next",
+        "SKIPPED": "@next",
+        "FAIL": "execute-task"
+      },
+      "needs": [
+        "execute-task"
+      ]
+    },
+    "review-code": {
+      "phase": "verify",
+      "label": "Review Code",
+      "group": "review",
+      "run": {
+        "agent": "reviewer-code"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md"
+      ],
+      "writes": "review-code.md",
+      "next": {
+        "PASS": "@next",
+        "CHANGES": "execute-task"
+      },
+      "needs": [
+        "gate"
+      ]
+    },
+    "review-security": {
+      "phase": "verify",
+      "label": "Review Security",
+      "group": "review",
+      "run": {
+        "agent": "reviewer-security"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md"
+      ],
+      "writes": "review-security.md",
+      "next": {
+        "PASS": "@next",
+        "CHANGES": "execute-task"
+      },
+      "needs": [
+        "gate"
+      ]
+    },
+    "review-ui": {
+      "phase": "verify",
+      "label": "Review UI",
+      "group": "review",
+      "run": {
+        "agent": "reviewer-ui"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md"
+      ],
+      "writes": "review-ui.md",
+      "next": {
+        "PASS": "@next",
+        "CHANGES": "execute-task"
+      },
+      "needs": [
+        "gate"
+      ]
+    },
+    "review-ux": {
+      "phase": "verify",
+      "label": "Review UX",
+      "group": "review",
+      "run": {
+        "agent": "reviewer-ux"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md"
+      ],
+      "writes": "review-ux.md",
+      "next": {
+        "PASS": "@next",
+        "CHANGES": "execute-task"
+      },
+      "needs": [
+        "gate"
+      ]
+    },
+    "pr": {
+      "phase": "deliver",
+      "label": "PR",
+      "run": {
+        "agent": "pr"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md",
+        "review-code.md",
+        "review-security.md",
+        "review-ui.md",
+        "review-ux.md"
+      ],
+      "writes": "pr.md",
+      "next": {
+        "PASS": "@next",
+        "FAIL": "@human"
+      },
+      "needs": [
+        "review-code",
+        "review-security",
+        "review-ui",
+        "review-ux"
+      ]
+    },
+    "approve": {
+      "phase": "deliver",
+      "label": "Approve",
+      "run": {
+        "agent": "approver"
+      },
+      "reads": [
+        "issue.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md",
+        "execute-task.md",
+        "gate.md",
+        "review-code.md",
+        "review-security.md",
+        "review-ui.md",
+        "review-ux.md",
+        "pr.md"
+      ],
+      "writes": "decision.md",
+      "next": {
+        "APPROVE": "@next",
+        "ESCALATE": "@human"
+      },
+      "needs": [
+        "pr"
+      ]
+    },
+    "merge": {
+      "phase": "deliver",
+      "label": "Merge",
+      "run": {
+        "agent": "merge"
+      },
+      "reads": [
+        "pr.md",
+        "gate.md",
+        "decision.md"
+      ],
+      "writes": "merge.md",
+      "next": {
+        "MERGED": "@next",
+        "FAIL": "@human"
+      },
+      "confirm": true,
+      "needs": [
+        "approve"
+      ]
     }
   },
   "profiles": {
@@ -145,7 +339,15 @@
         "prd",
         "techspec",
         "tasks",
-        "execute-task"
+        "execute-task",
+        "gate",
+        "review-code",
+        "review-security",
+        "review-ui",
+        "review-ux",
+        "pr",
+        "approve",
+        "merge"
       ]
     }
   }

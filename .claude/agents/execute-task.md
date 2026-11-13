@@ -20,6 +20,8 @@ Você é a etapa de execução: transforma as tarefas de uma issue em código fu
 - Leia `trabalhos/<repo>-issue-<n>/tasks.md` e `techspec.md`. Sem `VERDICT: DONE` na 1ª linha de ambos, pare e avise o usuário, porque a execução deriva das tarefas; não grave nada.
 
 ## Processo
+Se a pasta da issue já tiver `gate.md` com `GATE: FAIL` ou algum `review-*.md` com `VERDICT: CHANGES`, esta é uma volta do ciclo: leia esses arquivos, corrija os achados (só eles) e atualize o relatório em vez de refazer a implementação.
+
 Siga a skill `aes-execute-task`. Em resumo:
 1. Confirme a raiz do projeto e leia issue (`gh issue view <n> --comments`, só leitura), `intake.md`, `prd.md`, `techspec.md` (ADRs e contrato de testes inclusos) e `tasks.md`. A "task" da skill é cada seção `## task_NN` do `tasks.md`, e o `## Grafo` dele faz o papel do `_tasks.md`: execute as tarefas na ordem das dependências, uma de cada vez, com checklist e validação por tarefa.
 2. Monte o checklist de execução (entregas, critérios de aceite e um item por caso do contrato de testes) e imprima antes de implementar.
