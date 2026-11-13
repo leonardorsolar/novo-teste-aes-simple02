@@ -9,10 +9,13 @@ Workspace para criar e testar o agente **intake**, que lê uma issue do GitHub e
 - `.claude/skills/criar-agente/`: skill usada para criar agentes
 - `.claude/skills/triagem-de-issue/`: playbook do agente intake
 - `.claude/hooks/bloquear-perigosos.sh` + `.claude/settings.json`: bloqueio de comandos perigosos e de escrita no GitHub (todas as sessões)
-- `.claude/hooks/restringir-escrita.sh`: limita a escrita do intake, do prd e do doc-writer-techspec a `trabalhos/` (registrado no agente)
+- `.claude/hooks/restringir-escrita.sh`: limita a escrita do intake, do prd, do doc-writer-techspec e do doc-writer-tasks a `trabalhos/` (registrado no agente)
 - `.claude/skills/aes-create-prd/`: playbook do agente prd (modo fábrica em `references/factory-mode.md`)
 - `.claude/skills/aes-create-techspec/`: playbook do agente doc-writer-techspec (modo fábrica em `references/factory-mode.md`)
-- `.claude/cycles/novo-ciclo.md|.json`: ciclo (Pipeline) com as etapas intake → prd → techspec
+- `.claude/hooks/restringir-escrita-codigo.sh`: o execute-task escreve código, mas não em `.claude/`, `.git/`, `contexto/`, `CLAUDE.md` nem em intake/prd/techspec/tasks (registrado no agente)
+- `.claude/skills/aes-create-tasks/`: playbook do agente doc-writer-tasks (modo fábrica em `references/factory-mode.md`)
+- `.claude/skills/aes-execute-task/`: playbook do agente execute-task
+- `.claude/cycles/novo-ciclo.md|.json`: ciclo (Pipeline) com as etapas intake → prd → techspec → tasks → execute-task
 - `.aes/diagrams/intake-diagrama.excalidraw`: diagrama que explica como o agente foi construído (abrir em excalidraw.com)
 - `.aes/diagrams/prd-diagrama.excalidraw`: diagrama do agente prd (abrir em excalidraw.com)
 - `trabalhos/`: saídas (`<repo>-issue-<número>/intake.md`)
@@ -23,6 +26,8 @@ Workspace para criar e testar o agente **intake**, que lê uma issue do GitHub e
 | `intake` | "avalie/triar/decida se vale construir a issue N". Ex.: `@intake avalie a issue 12` | `triagem-de-issue` | `trabalhos/<repo>-issue-<n>/intake.md` | `ACCEPT` → `@next`, `NEEDS-INFO` → `@wait-author`, `REJECT` → `@rejected` |
 | `prd` | "crie o PRD da issue N". Ex.: `@prd crie o PRD da issue 3`. Exige `intake.md` com `DECISION: ACCEPT` | `aes-create-prd` (modo fábrica) | `trabalhos/<repo>-issue-<n>/prd.md` | `DONE` → `@next`, `BLOCKED` → `@human` |
 | `doc-writer-techspec` | "crie o techspec da issue N". Ex.: `@doc-writer-techspec crie o techspec da issue 3`. Exige `prd.md` com `VERDICT: DONE` | `aes-create-techspec` (modo fábrica) | `trabalhos/<repo>-issue-<n>/techspec.md` | `DONE` → `@next`, `BLOCKED` → `@human` |
+| `doc-writer-tasks` | "crie as tasks da issue N". Ex.: `@doc-writer-tasks crie as tasks da issue 3`. Exige `techspec.md` com `VERDICT: DONE` | `aes-create-tasks` (modo fábrica) | `trabalhos/<repo>-issue-<n>/tasks.md` | `DONE` → `@next`, `BLOCKED` → `@human` |
+| `execute-task` | "implemente/execute a issue N". Ex.: `@execute-task implemente a issue 3`. Exige `tasks.md` com `VERDICT: DONE` | `aes-execute-task` | código no repositório + `trabalhos/<repo>-issue-<n>/execute-task.md` | `DONE` → `@next`, `BLOCKED` → `@human` |
 
 A 1ª linha da entrega do intake é `DECISION: <veredito>` (prefixo próprio da triagem); a do prd e a do techspec são `VERDICT: <veredito>`.
 

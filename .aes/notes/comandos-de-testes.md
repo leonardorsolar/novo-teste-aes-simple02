@@ -20,7 +20,11 @@ use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skil
 passo 3:
 use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-create-techspec e ajuste  ciclo (pipeline) na fase design.
 
+passo 4:
+use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-create-tasks e ajuste  ciclo (pipeline) na fase design.
 
+passo 5:
+use a skill .claude/skills/criar-agente/SKILL.md e gere o bloco a partir da skill .claude/skills/aes-execute-task e ajuste  ciclo (pipeline) na fase Build.
 
 # Rodando o teste do passo 1
 

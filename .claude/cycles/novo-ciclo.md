@@ -32,3 +32,23 @@ Fases: Fase: Discovery, Design, Build, Verify, Deliver
 - comandos: @doc-writer-techspec crie o techspec da <issue#N>
 - aprovação: não
 - vereditos: DONE → @next; BLOCKED → @human
+
+### Tasks
+- id: tasks
+- executa: agente doc-writer-tasks (skill aes-create-tasks)
+- lê: issue.md, intake.md, prd.md, techspec.md
+- grava: tasks.md
+- comandos: @doc-writer-tasks crie as tasks da <issue#N>
+- aprovação: não
+- vereditos: DONE → @next; BLOCKED → @human
+
+## Build
+
+### Execute Task
+- id: execute-task
+- executa: agente execute-task (skill aes-execute-task)
+- lê: issue.md, intake.md, prd.md, techspec.md, tasks.md
+- grava: execute-task.md
+- comandos: @execute-task implemente a <issue#N>
+- aprovação: não
+- vereditos: DONE → @next; BLOCKED → @human

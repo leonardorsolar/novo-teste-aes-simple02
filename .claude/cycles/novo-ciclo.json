@@ -92,6 +92,49 @@
         "DONE": "@next",
         "BLOCKED": "@human"
       }
+    },
+    "tasks": {
+      "phase": "design",
+      "label": "Tasks",
+      "run": {
+        "agent": "doc-writer-tasks (skill aes-create-tasks)"
+      },
+      "reads": [
+        "issue.md",
+        "intake.md",
+        "prd.md",
+        "techspec.md"
+      ],
+      "writes": "tasks.md",
+      "next": {
+        "DONE": "@next",
+        "BLOCKED": "@human"
+      },
+      "needs": [
+        "techspec"
+      ]
+    },
+    "execute-task": {
+      "phase": "build",
+      "label": "Execute Task",
+      "run": {
+        "agent": "execute-task (skill aes-execute-task)"
+      },
+      "reads": [
+        "issue.md",
+        "intake.md",
+        "prd.md",
+        "techspec.md",
+        "tasks.md"
+      ],
+      "writes": "execute-task.md",
+      "next": {
+        "DONE": "@next",
+        "BLOCKED": "@human"
+      },
+      "needs": [
+        "tasks"
+      ]
     }
   },
   "profiles": {
@@ -100,7 +143,9 @@
       "steps": [
         "intake",
         "prd",
-        "techspec"
+        "techspec",
+        "tasks",
+        "execute-task"
       ]
     }
   }
